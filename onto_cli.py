@@ -8,7 +8,7 @@ import sys
 
 
 _OTL_URL = "https://github.com/myon-bioinformatics/OnTautoLogy.git"
-_OTL_COMMIT = "4c8aff4184fda0c70f61c591f9884ed85b5e6d91"
+_OTL_COMMIT = "a4173e778ffe6fed7ed216b7b0044ca42e589fc7"
 
 
 def _otl(args):
@@ -17,7 +17,7 @@ def _otl(args):
         print("onto otl requires uv: https://docs.astral.sh/uv/", file=sys.stderr)
         return 127
     source = f"git+{_OTL_URL}@{_OTL_COMMIT}"
-    if args[:1] == ["exchange"]:
+    if args[:1] == ["exchange"] or (args[:1] == ["entails"] and "--ttl" in args):
         source = f"ontautology[exchange] @ {source}"
     # Keep the process environment, including UV_OFFLINE, and leave all
     # standard streams attached to the caller.

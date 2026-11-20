@@ -34,8 +34,10 @@ class Launcher(unittest.TestCase):
         self.assertEqual(json.loads(out.getvalue()), {"nodes": [], "rels": []})
 
     def test_exact_child_dispatch_inherits_offline_and_streams(self):
-        pin = "git+https://github.com/myon-bioinformatics/OnTautoLogy.git@4c8aff4184fda0c70f61c591f9884ed85b5e6d91"
-        for args, source in [(["--help"], pin), (["exchange", "export", "neo4j", "space scope", "out.json"], "ontautology[exchange] @ " + pin)]:
+        pin = "git+https://github.com/myon-bioinformatics/OnTautoLogy.git@a4173e778ffe6fed7ed216b7b0044ca42e589fc7"
+        for args, source in [(["--help"], pin), (["entails", "-"], pin),
+                             (["entails", "-", "--ttl"], "ontautology[exchange] @ " + pin),
+                             (["exchange", "export", "neo4j", "space scope", "out.json"], "ontautology[exchange] @ " + pin)]:
             def run(argv, **kwargs):
                 self.assertEqual(argv, ["/bin/uv", "tool", "run", "--from", source, "ontautology", *args])
                 self.assertEqual(kwargs, {"check": False})
