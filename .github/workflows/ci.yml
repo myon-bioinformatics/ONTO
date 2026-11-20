@@ -25,5 +25,6 @@ jobs:
           cd "$RUNNER_TEMP"
           uv pip install --python consumer/bin/python "$(ls wheels/*.whl)[exchange]"
           echo '<urn:A> <urn:narrower> <urn:B> .' > sample.nt
-          consumer/bin/python -I -m onto_exchange query sample.nt 'SELECT ?x WHERE { <urn:A> <urn:narrower> ?x }' > answer.json
+          consumer/bin/python -I -m ontology query sample.nt 'SELECT ?x WHERE { <urn:A> <urn:narrower> ?x }' > answer.json
           consumer/bin/python -I -c 'import json; assert json.load(open("answer.json"))["results"]["bindings"] == [{"x": {"type": "uri", "value": "urn:B"}}]'
+          consumer/bin/python -I -m unittest discover -s "$GITHUB_WORKSPACE/tests"

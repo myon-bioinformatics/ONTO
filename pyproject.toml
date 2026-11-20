@@ -13,5 +13,5 @@ license = {file = "LICENSE"}
 exchange = ["rdflib>=7", "neo4j>=5"]
 
 [tool.setuptools]
-py-modules = ["ontology", "knowledgegraph", "onto_exchange"]
+py-modules = ["ontology", "knowledgegraph"]
 packages = ["onto_shared"]
