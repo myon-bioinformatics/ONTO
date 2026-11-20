@@ -10,4 +10,5 @@ requires-python = ">=3.11"
 license = {file = "LICENSE"}
 
 [tool.setuptools]
+py-modules = ["ontology", "knowledgegraph"]
 packages = ["onto_shared"]

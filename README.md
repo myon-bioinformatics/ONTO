@@ -4,7 +4,7 @@
 
 ## 役割
 
-- 語彙・データ・評価結果の一次情報は各リポジトリ側に置く。語彙検査とグラフ操作の正本はこのリポジトリの `onto_shared/` に置く。
+- 語彙・データ・評価結果の一次情報は各リポジトリ側に置く。語彙検査とグラフ操作の正本はリポジトリ直下の [ontology.py](ontology.py) と [knowledgegraph.py](knowledgegraph.py) に置く。
 - 更新は末端（孫）のリポジトリから。ONTO はそれを集めてリンクする
 
 ## 紐付け先
@@ -21,7 +21,8 @@
 checkout を `uv pip install .` で導入すると、どのプロジェクトからも次の入口を使えます。
 
 ```python
-from onto_shared import ontology, knowledgegraph
+import ontology
+import knowledgegraph
 ```
 
 [分類例](examples/shared_taxonomy.py) は同じグラフで語彙検査・循環検出・Mermaid 表示を行います。

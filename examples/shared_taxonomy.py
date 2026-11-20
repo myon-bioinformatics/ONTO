@@ -1,5 +1,6 @@
 """Run with an installed copy of onto-shared, from any checkout."""
-from onto_shared import knowledgegraph, ontology
+import knowledgegraph
+import ontology
 
 # The consumer defines its vocabulary and stable IDs. Edges point from parent to child.
 vocabulary = {"narrower": (["Category"], "Category")}
