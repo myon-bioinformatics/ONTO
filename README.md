@@ -40,3 +40,18 @@ python -m ontology export neo4j demo --format json > graph.json
 ```
 
 OTL はこの実装に事例・判断を渡し、論理検証で使ったデータが DB 往復後も同じかを調べます。
+
+### `onto` CLI
+
+The `onto-shared` distribution installs `onto`. Help, version inspection,
+and the shared Python modules need no RDF dependencies.
+
+- `onto exchange export neo4j trial graph.json` writes JSON to a file.
+  Use `graph.ttl` for a Turtle file, or omit the filename for Turtle on stdout.
+  `onto exchange export neo4j trial --format json` sends JSON to stdout.
+  Exchange commands use the `onto-shared[exchange]` extra.
+- `onto otl …` forwards arguments and standard streams to the separately
+  packaged OnTautoLogy CLI using uv. Only the child's `exchange` route requests
+  its RDF dependencies. Set `UV_OFFLINE=1` to use only an existing uv cache.
+- `onto versions --json` reports the pinned OnTautoLogy source. This launcher
+  does not yet package or dispatch TOO or TOL.

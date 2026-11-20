@@ -12,6 +12,9 @@ license = {file = "LICENSE"}
 [project.optional-dependencies]
 exchange = ["rdflib>=7", "neo4j>=5"]
 
+[project.scripts]
+onto = "onto_cli:main"
+
 [tool.setuptools]
-py-modules = ["ontology", "knowledgegraph"]
+py-modules = ["ontology", "knowledgegraph", "onto_cli"]
 packages = ["onto_shared"]
