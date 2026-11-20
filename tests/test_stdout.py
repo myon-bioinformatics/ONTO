@@ -5,7 +5,7 @@ from io import StringIO
 from unittest.mock import patch
 
 from rdflib import Graph
-import onto_exchange as exchange
+import ontology as exchange
 
 
 class ExportStreams(unittest.TestCase):
