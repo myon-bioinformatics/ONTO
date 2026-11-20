@@ -34,7 +34,9 @@ import knowledgegraph
 `uv pip install '.[exchange]'` で追加できます。保存済み RDF の照会は DB を起動せずに実行できます。
 
 ```sh
-python -m onto_exchange query graph.ttl 'SELECT ?s ?p ?o WHERE { ?s ?p ?o }'
+python -m onto_exchange query graph.ttl 'SELECT ?s ?p ?o WHERE { ?s ?p ?o }' > answer.json
+python -m onto_exchange export neo4j demo > graph.ttl
+python -m onto_exchange export neo4j demo --format json > graph.json
 ```
 
 OTL はこの実装に事例・判断を渡し、論理検証で使ったデータが DB 往復後も同じかを調べます。
