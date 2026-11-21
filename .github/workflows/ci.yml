@@ -34,3 +34,25 @@ jobs:
           cmp direct-answer.json answer.json
           consumer/bin/python -I -c 'import json; assert json.load(open("answer.json"))["results"]["bindings"] == [{"x": {"type": "uri", "value": "urn:B"}}]'
           consumer/bin/python -I -m unittest discover -s "$GITHUB_WORKSPACE/tests"
+      - name: Check installed ONTO delegation to OTL entailment
+        run: |
+          cd "$RUNNER_TEMP"
+          printf '%s\n' '{"premises":[["OR",["NOT","cat"],"mammal"],"cat"],"conclusion":"mammal"}' > entails-input.json
+          consumer/bin/onto otl entails - < entails-input.json > entails.json
+          consumer/bin/onto otl entails - --ttl < entails-input.json > entails.ttl
+          consumer/bin/python -I - <<'PY'
+          import json
+          from pathlib import Path
+          from rdflib import Graph, Namespace, RDF
+
+          result = json.loads(Path("entails.json").read_text())
+          assert result == {"verdict": "entailed", "atoms": ["cat", "mammal"], "counterexample": None}
+
+          ot = Namespace("urn:otl:")
+          graph = Graph().parse("entails.ttl", format="turtle")
+          check, = graph.subjects(RDF.type, ot.InferenceCheck)
+          assert set(graph.objects(check, ot.verdict)) == {ot.entailed}
+          assert len(set(graph.objects(check, ot.premise))) == 2
+          conclusion, = graph.objects(check, ot.conclusion)
+          assert json.loads(str(graph.value(conclusion, ot.rule))) == "mammal"
+          PY

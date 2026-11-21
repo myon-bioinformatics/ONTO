@@ -28,6 +28,8 @@ import knowledgegraph
 [分類例](examples/shared_taxonomy.py) は同じグラフで語彙検査・循環検出・Mermaid 表示を行います。
 共通処理を直すときは ONTO を更新し、利用側で採用する版を選びます。
 
+Pages で Mermaid を描画するときは、ビルド時に `knowledgegraph.mermaid_renderer_js()` の戻り値を UTF-8 のモジュールとして一度書き出す。各画面はそのモジュールから `renderDiagram(id, source)` を import する。最初の描画時に固定版の Mermaid を CDN から読み込み、同じページの以後の描画でも使う。
+
 ## RDF・プロパティグラフの入出力
 
 [ontology.py](ontology.py) は RDF の読み込み、SPARQL 照会、Neo4j・ArcadeDB への入出力を担当します。
