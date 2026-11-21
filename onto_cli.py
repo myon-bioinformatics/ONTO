@@ -8,7 +8,7 @@ import sys
 
 
 _OTL_URL = "https://github.com/myon-bioinformatics/OnTautoLogy.git"
-_OTL_COMMIT = "a4173e778ffe6fed7ed216b7b0044ca42e589fc7"
+_OTL_COMMIT = "2c0d12bdcb80258c261bf13849728b9a6891bde3"
 
 
 def _otl(args):
