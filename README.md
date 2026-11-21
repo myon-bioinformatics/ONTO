@@ -53,7 +53,20 @@ and the shared Python modules need no RDF dependencies.
   `onto exchange export neo4j trial --format json` sends JSON to stdout.
   Exchange commands use the `onto-shared[exchange]` extra.
 - `onto otl …` forwards arguments and standard streams to the separately
-  packaged OnTautoLogy CLI using uv. Only the child's `exchange` route requests
+  packaged OnTautoLogy CLI using uv. The child's `exchange` route and `entails --ttl` request
   its RDF dependencies. Set `UV_OFFLINE=1` to use only an existing uv cache.
 - `onto versions --json` reports the pinned OnTautoLogy source. This launcher
   does not yet package or dispatch TOO or TOL.
+
+### 分類規則を反例で点検する
+
+`onto otl entails` は、明示した命題論理の前提をすべて満たし、結論だけを偽にできるかを調べます。
+たとえば「猫なら哺乳類」を登録しても「哺乳類なら猫」とは限りません。
+
+```sh
+echo '{"premises":[["OR",["NOT","猫"],"哺乳類"],"哺乳類"],"conclusion":"猫"}' | onto otl entails -
+```
+
+この例では `counterexample` が返り、「哺乳類が真、猫が偽」が反例になります。
+整合する前提から結論が従う場合は `entailed`、前提自体が矛盾する場合は
+`inconsistent-premises` です。結果をTurtleで保存するには `--ttl -o result.ttl` を付けます。
