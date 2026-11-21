@@ -74,3 +74,13 @@ echo '{"premises":[["OR",["NOT","猫"],"哺乳類"],"哺乳類"],"conclusion":"�
 この例では `counterexample` が返り、「哺乳類が真、猫が偽」が反例になります。
 整合する前提から結論が従う場合は `entailed`、前提自体が矛盾する場合は
 `inconsistent-premises` です。結果をTurtleで保存するには `--ttl -o result.ttl` を付けます。
+
+## GitHub Pages
+
+[ONTO の公開ページ](https://myon-bioinformatics.github.io/ONTO/) は、この README と `docs/assets/` から生成します。
+ローカルでは、ビルド時に固定版の PySaiyanWeBoo を取得してプレビューできます。
+
+```sh
+python3 -S scripts/build_pages.py _site
+python3 -m http.server --directory _site
+```
