@@ -92,6 +92,10 @@ def _dir_if_marked(directory, marker):
 def infer_checkout(dirname, marker, anchor=None):
     """隣の checkout を先に見て、なければ上へ辿ってマーカーを探す。"""
     here = _anchor_dir(anchor)
+    if dirname == ".":
+        found = _dir_if_marked(here, marker)
+        if found is not None:
+            return found
     found = _dir_if_marked(here.parent / dirname, marker)
     if found is not None:
         return found
