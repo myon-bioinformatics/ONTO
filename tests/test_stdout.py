@@ -4,10 +4,14 @@ from contextlib import redirect_stdout
 from io import StringIO
 from unittest.mock import patch
 
-from rdflib import Graph
+try:
+    from rdflib import Graph
+except ModuleNotFoundError:
+    Graph = None
 import ontology as exchange
 
 
+@unittest.skipUnless(Graph is not None, "rdflib is not installed")
 class ExportStreams(unittest.TestCase):
     def test_stdout_can_be_read_as_turtle_and_json(self):
         graph = Graph().parse(data='<urn:a> <urn:p> "日本語"@ja .', format="nt")
