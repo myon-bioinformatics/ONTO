@@ -183,9 +183,9 @@ def main(argv=None, *, prog="ontautology exchange"):
             sub.add_argument("file", nargs="?", type=Path, help="output file (default: stdout)")
             sub.add_argument("--format", choices=("ttl", "json"), help="stdout format (default: ttl)")
         else:
-            sub.add_argument("file", type=Path, help=".ttl, .nt, .rdf")
+            sub.add_argument("file", type=Path, help=".ttl, .nt, .rdf file or - for Turtle on stdin")
     query = subs.add_parser("query")
-    query.add_argument("file", type=Path, help=".ttl, .nt, .rdf")
+    query.add_argument("file", type=Path, help=".ttl, .nt, .rdf file or - for Turtle on stdin")
     query.add_argument("select", help="SPARQL SELECT")
     args = parser.parse_args(argv)
     if args.action == "export":
@@ -209,7 +209,11 @@ def main(argv=None, *, prog="ontautology exchange"):
             args.file.write_text(output, encoding="utf-8")
     else:
         try:
-            graph = read_graph(args.file)
+            if args.file == Path("-"):
+                from rdflib import Graph
+                graph = Graph().parse(data=sys.stdin.buffer.read(), format="turtle")
+            else:
+                graph = read_graph(args.file)
         except ValueError as exc:
             parser.error(str(exc))
         if args.action == "import":
