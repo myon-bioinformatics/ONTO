@@ -106,6 +106,24 @@ def read_graph(path):
     return Graph().parse(path, format=formats[suffix])
 
 
+def _read_stdin_turtle():
+    from rdflib import Graph
+
+    stream = getattr(sys.stdin, "buffer", None)
+    if stream is None:
+        raise ValueError("Turtle stdin is unavailable")
+    try:
+        data = stream.read()
+    except (OSError, ValueError) as exc:
+        raise ValueError("Could not read Turtle from stdin") from exc
+    try:
+        return Graph().parse(data=data, format="turtle")
+    except UnicodeDecodeError as exc:
+        raise ValueError("Turtle on stdin must be valid UTF-8") from exc
+    except SyntaxError as exc:
+        raise ValueError("Invalid Turtle on stdin") from exc
+
+
 def statements(graph):
     """Encode terms with their RDF datatype or language intact."""
     from rdflib import BNode, URIRef
@@ -210,8 +228,7 @@ def main(argv=None, *, prog="ontautology exchange"):
     else:
         try:
             if args.file == Path("-"):
-                from rdflib import Graph
-                graph = Graph().parse(data=sys.stdin.buffer.read(), format="turtle")
+                graph = _read_stdin_turtle()
             else:
                 graph = read_graph(args.file)
         except ValueError as exc:
