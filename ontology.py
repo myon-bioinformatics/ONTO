@@ -195,8 +195,8 @@ def main(argv=None, *, prog="ontautology exchange"):
     subs = parser.add_subparsers(dest="action", required=True)
     for action in ("import", "export"):
         sub = subs.add_parser(action)
-        sub.add_argument("backend", choices=("neo4j", "arcade"))
-        sub.add_argument("scope")
+        sub.add_argument("backend", choices=("neo4j", "arcade"),help="graph database")
+        sub.add_argument("scope",help="scope name that keeps these statements apart from others")
         if action == "export":
             sub.add_argument("file", nargs="?", type=Path, help="output file (default: stdout)")
             sub.add_argument("--format", choices=("ttl", "json"), help="stdout format (default: ttl)")
