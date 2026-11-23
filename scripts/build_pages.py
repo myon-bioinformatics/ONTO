@@ -59,7 +59,8 @@ def page_spec(readme):
         "icon": ICON,
         "favicon": FAVICON,
         "blocks": [
-            {"type": "links", "items": [{"label": "GitHub README", "href": README_URL}]},
+            {"type": "links", "items": [{"label": "🏠 Portfolio", "href": "https://myon-bioinformatics.github.io/"},
+                                        {"label": "GitHub README", "href": README_URL}]},
             {"type": "section", "title": "概念図", "blocks": [
                 {"type": "image", "src": OVERVIEW, "alt": diagram[1], "width": 1142, "height": 914},
                 {"type": "links", "items": [{"label": "概念図を原寸で開く", "href": OVERVIEW}]},
