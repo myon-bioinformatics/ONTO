@@ -45,7 +45,7 @@ def main(argv=None):
     routes.add_parser("exchange", help="import, export, or query RDF")
     routes.add_parser("otl", help="run the standalone OnTautoLogy CLI")
     versions = routes.add_parser("versions", help="report the standalone child source pin")
-    versions.add_argument("--json", action="store_true")
+    versions.add_argument("--json", action="store_true",help="print JSON instead of text")
     if not args:
         parser.print_help()
         return 0
