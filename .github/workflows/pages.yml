@@ -30,5 +30,5 @@ jobs:
       guide_assets: >-
         docs/assets/onto-icon.png=icon.png
         docs/assets/favicon.png=favicon.png
-        docs/assets/onto-overview.jpg=overview.jpg
+        docs/assets/repository-concept.jpg=overview.jpg
         docs/assets/graphs.gif=demos/graphs.gif

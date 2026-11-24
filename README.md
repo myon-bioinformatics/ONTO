@@ -2,7 +2,7 @@
 
 オントロジーに絡むリポジトリを紐付ける、索引と、横断して使う Python API。
 
-[![概念図。TopOntoLogy・OnTautoLogy・TaxOntOy と ONTO の関係、共通 Python API、RDF・データベース連携](docs/assets/onto-overview.jpg)](docs/assets/onto-overview.jpg)
+[![概念図。TopOntoLogy・OnTautoLogy・TaxOntOy と ONTO の関係、共通 Python API、RDF・データベース連携](docs/assets/repository-concept.jpg)](docs/assets/repository-concept.jpg)
 
 [アイコン（256×256）](docs/assets/onto-icon.png) · [<img src="docs/assets/favicon.png" width="16" height="16" alt=""> ファビコン（32×32）](docs/assets/favicon.png)
 
