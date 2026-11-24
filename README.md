@@ -83,10 +83,8 @@ echo '{"premises":[["OR",["NOT","猫"],"哺乳類"],"哺乳類"],"conclusion":"�
 
 ## GitHub Pages
 
-[ONTO の公開ページ](https://myon-bioinformatics.github.io/ONTO/) は、この README と `docs/assets/` から生成します。
-ローカルでは、ビルド時に固定版の PySaiyanWeBoo を取得してプレビューできます。
+[ONTO の利用ガイド](https://myon-bioinformatics.github.io/ONTO/)（🎞 GIF デモ / 🧩 機能一覧）は、データだけの `docs/guide.page.json` を親の `reusable-pages-static.yml` が固定版の PySaiyanWeBoo で描きます。
 
-```sh
-python3 -S scripts/build_pages.py _site
-python3 -m http.server --directory _site
-```
+![knowledgegraph.py で分類を Mermaid の図にし、順序と循環を出す](docs/assets/graphs.gif)
+
+GIF は BrowserTestKit の `evidence_gif.py` で撮りました（受領票 [`docs/assets/graphs.json`](docs/assets/graphs.json)）。

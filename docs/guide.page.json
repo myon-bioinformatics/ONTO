@@ -1,0 +1,143 @@
+{
+  "schema": "web-ui-page/1",
+  "title": "🕸 ONTO 利用ガイド",
+  "theme": "auto",
+  "description": "オントロジーに絡むリポジトリを紐付ける索引と、横断して使う Python API（語彙検査・グラフ操作・RDF の出し入れ）。",
+  "icon": "./icon.png",
+  "favicon": "./favicon.png",
+  "blocks": [
+    {
+      "type": "badges",
+      "items": [
+        "🕸 ナレッジグラフ",
+        "📚 オントロジーの索引",
+        "🐍 ontology.py · knowledgegraph.py"
+      ]
+    },
+    {
+      "type": "tabs",
+      "id": "guide",
+      "tabs": [
+        {
+          "label": "🎞 GIF デモ",
+          "blocks": [
+            {
+              "type": "card",
+              "title": "🕸 関係図 · 🪜 順序 · 🔁 循環",
+              "text": "knowledgegraph.py で分類を Mermaid の図にし、親から子への順序と代表的な循環を出します（PC 幅とスマホ幅）。",
+              "blocks": [
+                {
+                  "type": "image",
+                  "src": "./demos/graphs.gif",
+                  "alt": "ONTO knowledgegraph: graph_mermaid of a small taxonomy with topological_order, then relation_cycles of a cycle, and the phone width"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "🧩 機能一覧",
+          "blocks": [
+            {
+              "type": "image",
+              "src": "./overview.jpg",
+              "alt": "ONTO の概念図。TopOntoLogy・OnTautoLogy・TaxOntOy と ONTO の関係、共通 Python API、RDF・データベース連携"
+            },
+            {
+              "type": "section",
+              "title": "🔗 紐付け先",
+              "blocks": [
+                {
+                  "type": "links",
+                  "items": [
+                    {
+                      "label": "🗺 TopOntoLogy",
+                      "href": "https://myon-bioinformatics.github.io/TopOntoLogy/"
+                    },
+                    {
+                      "label": "🧮 OnTautoLogy",
+                      "href": "https://myon-bioinformatics.github.io/OnTautoLogy/"
+                    },
+                    {
+                      "label": "🌳 TaxOntOy",
+                      "href": "https://myon-bioinformatics.github.io/TaxOntOy/"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "section",
+              "title": "🐍 Python から呼ぶ",
+              "blocks": [
+                {
+                  "type": "card",
+                  "title": "✅ 語彙の検査",
+                  "text": "語彙に合わない節点・辺を返します（空なら合格）。",
+                  "blocks": [
+                    {
+                      "type": "output",
+                      "text": "import ontology\nontology.violations(graph, vocabulary)"
+                    }
+                  ]
+                },
+                {
+                  "type": "card",
+                  "title": "🕸 図 · 🪜 順序 · 🔁 循環",
+                  "text": "Mermaid の図、親から子への順序、代表的な循環。",
+                  "blocks": [
+                    {
+                      "type": "output",
+                      "text": "import knowledgegraph\nknowledgegraph.graph_mermaid(graph, focus='A')\nknowledgegraph.topological_order(graph['edges'])\nknowledgegraph.relation_cycles(graph['edges'])"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "section",
+              "title": "▶️ CLI",
+              "blocks": [
+                {
+                  "type": "card",
+                  "title": "🔁 RDF の出し入れ",
+                  "text": "RDF を読み込み・書き出し・問い合わせます。",
+                  "blocks": [
+                    {
+                      "type": "output",
+                      "text": "python -S onto_cli.py exchange --help"
+                    }
+                  ]
+                },
+                {
+                  "type": "card",
+                  "title": "🧮 OnTautoLogy を呼ぶ",
+                  "text": "固定した版の OTL の CLI をそのまま呼びます。",
+                  "blocks": [
+                    {
+                      "type": "output",
+                      "text": "python -S onto_cli.py otl --help\npython -S onto_cli.py versions"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "links",
+      "items": [
+        {
+          "label": "📦 リポジトリ",
+          "href": "https://github.com/myon-bioinformatics/ONTO"
+        },
+        {
+          "label": "📖 README",
+          "href": "https://github.com/myon-bioinformatics/ONTO#readme"
+        }
+      ]
+    }
+  ]
+}

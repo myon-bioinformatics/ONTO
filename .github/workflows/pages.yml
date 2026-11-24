@@ -1,30 +1,34 @@
 name: Pages
 
+# Publishes the usage guide: docs/guide.page.json (a web-ui-page/1 spec, data only, with 🎞 GIF demo / 🧩 features
+# tabs). The parent's reusable workflow renders it with the PySaiyanWeBoo commit pinned there — no HTML, CSS or JS
+# lives in this repository. Pull requests build the page (an invalid spec fails there); only main deploys.
 on:
-  pull_request:
   push:
     branches: [main]
+    paths:
+      - "docs/guide.page.json"
+      - "docs/assets/**"
+      - ".github/workflows/pages.yml"
+  pull_request:
+    paths:
+      - "docs/guide.page.json"
+      - "docs/assets/**"
+      - ".github/workflows/pages.yml"
 
 permissions:
   contents: read
+  pages: write
+  id-token: write
 
 jobs:
-  build:
-    if: github.event_name == 'pull_request'
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          persist-credentials: false
-      - run: python3 -S scripts/build_pages.py _site
-
-  deploy:
-    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
-    uses: myon-bioinformatics/myon-bioinformatics/.github/workflows/reusable-pages-static.yml@fbf433b296ec047f1c9acdf4d5d12c81ff7f59e8
+  pages:
+    uses: myon-bioinformatics/myon-bioinformatics/.github/workflows/reusable-pages-static.yml@dbe7e16be53f9e5b8c9ba29ff6ed8be0899a35ff
     with:
       artifact_path: _site
-      build: python3 -S scripts/build_pages.py _site
+      guide_page: docs/guide.page.json
+      guide_assets: >-
+        docs/assets/onto-icon.png=icon.png
+        docs/assets/favicon.png=favicon.png
+        docs/assets/onto-overview.jpg=overview.jpg
+        docs/assets/graphs.gif=demos/graphs.gif
