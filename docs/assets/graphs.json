@@ -1,0 +1,137 @@
+{
+  "schema": "btk-evidence-gif/2",
+  "gif": "graphs.gif",
+  "bytes": 52481,
+  "sha256": "7a2e5632f471194d6ed96caf62f756ef336110164cb6b3d2a8f4508ff0a7c7cb",
+  "frames": 7,
+  "canvas": "720x512",
+  "browser": "chromium 153.0.8010.12",
+  "executable": {
+    "source": "given",
+    "path": "/opt/pw-browsers/chromium-1243/chrome-linux64/chrome"
+  },
+  "recorded": "2026-11-24",
+  "commit": "ee7328e3269eed2bbb4fe85088094323f1af4ab5",
+  "stills": {
+    "dir": null,
+    "files": []
+  },
+  "encoder": {
+    "module": "PySaiyanWeBoo gif.js",
+    "web_ui": "bbe5c0b0087f40ff3fffd53bec5111c2ba2d747d",
+    "bytes": 52481,
+    "frames": 7,
+    "colors": 255,
+    "thin": 0,
+    "attempts": 1,
+    "stored": 7,
+    "merged": 0,
+    "buckets": 765,
+    "overBudget": false,
+    "encodeMs": 68,
+    "images": 3,
+    "reused": 4,
+    "patches": 0,
+    "synthesized": 0,
+    "capture_s": 11.4
+  },
+  "limits": {
+    "colors": 255,
+    "max_bytes": null,
+    "max_frames": 300,
+    "last_hold_ms": 2000
+  },
+  "transfer": {
+    "screenshots": 7,
+    "png_bytes": 278095,
+    "identical": 4,
+    "patches": 0,
+    "calls": 3,
+    "sent_bytes": 149024,
+    "gif_bytes": 52481
+  },
+  "mapped": [
+    "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/"
+  ],
+  "summary": {
+    "pass": 3,
+    "fail": 0
+  },
+  "shots": [
+    {
+      "label": "🕸 graph_mermaid と 🪜 topological_order",
+      "url": "/index.html",
+      "viewport": "1280x800",
+      "steps": [
+        "wait 2500"
+      ],
+      "status": "pass",
+      "errors": [],
+      "allowed": [],
+      "external": [],
+      "generator": null
+    },
+    {
+      "label": "🔁 relation_cycles",
+      "url": "/index.html",
+      "viewport": "1280x800",
+      "steps": [
+        "wait 2500",
+        "scroll 700"
+      ],
+      "status": "pass",
+      "errors": [],
+      "allowed": [],
+      "external": [],
+      "generator": null
+    },
+    {
+      "label": "📱 スマホ幅",
+      "url": "/index.html",
+      "viewport": "392x848",
+      "steps": [
+        "wait 2500"
+      ],
+      "status": "pass",
+      "errors": [],
+      "allowed": [],
+      "external": [],
+      "generator": null
+    }
+  ],
+  "plan": [
+    {
+      "label": "🕸 graph_mermaid と 🪜 topological_order",
+      "url": "/index.html",
+      "viewport": "1280x800",
+      "steps": [
+        {
+          "wait": 2500
+        }
+      ]
+    },
+    {
+      "label": "🔁 relation_cycles",
+      "url": "/index.html",
+      "viewport": "1280x800",
+      "steps": [
+        {
+          "wait": 2500
+        },
+        {
+          "scroll": 700
+        }
+      ]
+    },
+    {
+      "label": "📱 スマホ幅",
+      "url": "/index.html",
+      "viewport": "392x848",
+      "steps": [
+        {
+          "wait": 2500
+        }
+      ]
+    }
+  ]
+}
