@@ -19,23 +19,6 @@
       "id": "guide",
       "tabs": [
         {
-          "label": "🎞 GIF デモ",
-          "blocks": [
-            {
-              "type": "card",
-              "title": "🕸 関係図 · 🪜 順序 · 🔁 循環",
-              "text": "knowledgegraph.py で分類を Mermaid の図にし、親から子への順序と代表的な循環を出します（PC 幅とスマホ幅）。",
-              "blocks": [
-                {
-                  "type": "image",
-                  "src": "./demos/graphs.gif",
-                  "alt": "ONTO knowledgegraph: graph_mermaid of a small taxonomy with topological_order, then relation_cycles of a cycle, and the phone width"
-                }
-              ]
-            }
-          ]
-        },
-        {
           "label": "🧩 機能一覧",
           "blocks": [
             {
@@ -119,6 +102,55 @@
                       "text": "python -S onto_cli.py otl --help\npython -S onto_cli.py versions"
                     }
                   ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "🔬 検証ガイド",
+          "blocks": [
+            {
+              "type": "runbook",
+              "id": "verify",
+              "books": [
+                {
+                  "label": "⚡ そのまま",
+                  "intro": "📋 コピーして手元で試し、結果を記録できます。🤖 の手順は、Pages の公開で実際に動かした結果も載ります。",
+                  "runbook": {
+                    "key": "onto/verify",
+                    "steps": [
+                      {
+                        "id": "versions",
+                        "title": "📌 固定した OTL",
+                        "command": "python3 -S onto_cli.py versions",
+                        "run": true
+                      },
+                      {
+                        "id": "help",
+                        "title": "❓ ヘルプ",
+                        "command": "python3 -S onto_cli.py --help",
+                        "run": true
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "🎞 GIF デモ",
+          "blocks": [
+            {
+              "type": "card",
+              "title": "🕸 関係図 · 🪜 順序 · 🔁 循環",
+              "text": "knowledgegraph.py で分類を Mermaid の図にし、親から子への順序と代表的な循環を出します（PC 幅とスマホ幅）。",
+              "blocks": [
+                {
+                  "type": "image",
+                  "src": "./demos/graphs.gif",
+                  "alt": "ONTO knowledgegraph: graph_mermaid of a small taxonomy with topological_order, then relation_cycles of a cycle, and the phone width"
                 }
               ]
             }
