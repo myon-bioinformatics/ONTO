@@ -5,6 +5,7 @@ import json
 import shutil
 import subprocess
 import sys
+from pathlib import Path
 
 
 _OTL_URL = "https://github.com/myon-bioinformatics/OnTautoLogy.git"
@@ -44,12 +45,28 @@ def main(argv=None):
     routes = parser.add_subparsers(dest="route", required=True)
     routes.add_parser("exchange", help="import, export, or query RDF")
     routes.add_parser("otl", help="run the standalone OnTautoLogy CLI")
+    audit = routes.add_parser("audit-links", help="find missing, unavailable, or unlinked evidence")
+    audit.add_argument("graph", type=Path, help="JSON graph with expected_links, or - for stdin")
+    audit.add_argument("--expected", type=Path, help="override expected_links with a JSON list")
     versions = routes.add_parser("versions", help="report the standalone child source pin")
     versions.add_argument("--json", action="store_true",help="print JSON instead of text")
     if not args:
         parser.print_help()
         return 0
     result = parser.parse_args(args)
+    if result.route == "audit-links":
+        from ontology import link_gaps
+
+        try:
+            graph = json.load(sys.stdin) if result.graph == Path("-") else json.loads(result.graph.read_text(encoding="utf-8"))
+            expected = (json.loads(result.expected.read_text(encoding="utf-8")) if result.expected else graph["expected_links"])
+            if not all(isinstance(items, list) for items in (graph["nodes"], graph["edges"], expected)):
+                raise ValueError("nodes, edges and expected links must be JSON arrays")
+            findings = link_gaps(graph, expected)
+        except (OSError, ValueError, TypeError, KeyError) as exc:
+            audit.exit(2, f"onto audit-links: {exc}\n")
+        print(json.dumps(findings, indent=2, ensure_ascii=False))
+        return 1 if findings else 0
     if result.json:
         print(json.dumps({"otl": {"repository": _OTL_URL, "commit": _OTL_COMMIT}}))
     else:
