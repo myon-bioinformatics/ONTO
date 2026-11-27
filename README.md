@@ -89,9 +89,9 @@ echo '{"premises":[["OR",["NOT","猫"],"哺乳類"],"哺乳類"],"conclusion":"�
 
 GIF は BrowserTestKit の `evidence_gif.py` で撮りました（受領票 [`docs/assets/graphs.json`](docs/assets/graphs.json)）。
 
-### Audit expected links
+### Mottainai: audit expected links
 
-`python -S -m onto_cli audit-links graph.json` checks the explicit
+[`mottainai.py`](mottainai.py) checks the explicit
 `expected_links` triples in a JSON graph without inferring what should be
 connected. Pipe a graph with `audit-links -`, or provide a separate JSON list
 with `--expected expected.json`. With both endpoints present, a missing direct
@@ -99,3 +99,13 @@ edge is `unlinked`; a missing node is `missing-endpoint`; a node expressly
 marked `"available": false` is `unavailable-endpoint`. These checks complement
 vocabulary validation; they do not prove that existing edges are correct.
 The exit codes are 0 for no gaps, 1 for findings, and 2 for invalid input.
+
+Run the [small regression corpus](examples/mottainai/evidence-links.json):
+```sh
+python -S mottainai.py examples/mottainai/evidence-links.json
+# Same command through the installed package:
+onto audit-links examples/mottainai/evidence-links.json
+```
+Add new known cases to this corpus as the distinctions improve. Domain data
+stays upstream: Err-o-RoadRunner generates its detailed graph from its existing
+failure corpus, without replicating that corpus in ONTO.

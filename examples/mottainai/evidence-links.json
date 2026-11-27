@@ -1,0 +1,56 @@
+{
+  "nodes": [
+    {
+      "id": "assessment"
+    },
+    {
+      "id": "stored"
+    },
+    {
+      "id": "retained"
+    },
+    {
+      "id": "old",
+      "available": false
+    }
+  ],
+  "edges": [
+    {
+      "source": "stored",
+      "target": "assessment",
+      "relation": "supported_by"
+    },
+    {
+      "source": "assessment",
+      "target": "stored",
+      "relation": "near"
+    },
+    {
+      "source": "assessment",
+      "target": "retained",
+      "relation": "supported_by"
+    }
+  ],
+  "expected_links": [
+    {
+      "source": "assessment",
+      "target": "stored",
+      "relation": "supported_by"
+    },
+    {
+      "source": "assessment",
+      "target": "retained",
+      "relation": "supported_by"
+    },
+    {
+      "source": "assessment",
+      "target": "old",
+      "relation": "supported_by"
+    },
+    {
+      "source": "assessment",
+      "target": "unknown",
+      "relation": "supported_by"
+    }
+  ]
+}

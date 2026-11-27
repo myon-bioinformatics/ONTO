@@ -16,5 +16,5 @@ exchange = ["rdflib>=7", "neo4j>=5"]
 onto = "onto_cli:main"
 
 [tool.setuptools]
-py-modules = ["ontology", "knowledgegraph", "onto_cli"]
+py-modules = ["ontology", "knowledgegraph", "mottainai", "onto_cli"]
 packages = ["onto_shared"]

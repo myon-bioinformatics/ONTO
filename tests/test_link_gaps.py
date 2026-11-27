@@ -5,19 +5,19 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from ontology import link_gaps
+from mottainai import link_gaps
 
 
 def edge(source, target, relation="supported_by"):
     return {"source": source, "relation": relation, "target": target}
 
 
+ROOT = Path(__file__).resolve().parents[1]
+SAMPLE = ROOT / "examples/mottainai/evidence-links.json"
+
+
 def fixture():
-    nodes = [{"id": "assessment"}, {"id": "stored"}, {"id": "retained"}, {"id": "old", "available": False}]
-    expected = [edge("assessment", x) for x in ("stored", "retained", "old", "unknown")]
-    # An arrow backwards or an unrelated association does not meet the requirement.
-    actual = [edge("stored", "assessment"), edge("assessment", "stored", "near"), edge("assessment", "retained")]
-    return {"nodes": nodes, "edges": actual, "expected_links": expected}
+    return json.loads(SAMPLE.read_text(encoding="utf-8"))
 
 
 class LinkGapTests(unittest.TestCase):
@@ -42,3 +42,7 @@ class LinkGapTests(unittest.TestCase):
             clean = subprocess.run(args + ["--expected", str(path)], input=data, capture_output=True, text=True)
             self.assertEqual(clean.returncode, 0, clean.stderr)
             self.assertEqual(json.loads(clean.stdout), [])
+        direct = subprocess.run([sys.executable, "-S", str(ROOT / "mottainai.py"), str(SAMPLE)],
+                                capture_output=True, text=True)
+        self.assertEqual(direct.returncode, 1, direct.stderr)
+        self.assertEqual(json.loads(direct.stdout), json.loads(result.stdout))
