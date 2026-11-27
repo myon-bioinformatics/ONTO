@@ -1,0 +1,253 @@
+{
+  "schema": "onto.procedure-guide.v1",
+  "case_id": "CASE-001",
+  "title": "法人契約から個人契約への切替（匿名化教材）",
+  "privacy": {
+    "classification": "public-synthetic",
+    "source": "抽象化した手続きの学習例",
+    "raw_records_included": false
+  },
+  "vocabulary": {
+    "performs": [
+      [
+        "Actor"
+      ],
+      "Task"
+    ],
+    "responsible_for": [
+      [
+        "Organization"
+      ],
+      "Task"
+    ],
+    "requires": [
+      [
+        "Task"
+      ],
+      "Document"
+    ],
+    "precedes": [
+      [
+        "Task"
+      ],
+      "Task"
+    ],
+    "supported_by": [
+      [
+        "Task"
+      ],
+      "Evidence"
+    ],
+    "subject_to": [
+      [
+        "Task"
+      ],
+      "Deadline"
+    ]
+  },
+  "nodes": [
+    {
+      "id": "actor-a",
+      "type": "Actor",
+      "name": "申請者A"
+    },
+    {
+      "id": "org-b",
+      "type": "Organization",
+      "name": "窓口組織B"
+    },
+    {
+      "id": "org-c",
+      "type": "Organization",
+      "name": "旧契約組織C"
+    },
+    {
+      "id": "notice",
+      "type": "Task",
+      "name": "📢 旧契約の通知",
+      "status": "reported-done"
+    },
+    {
+      "id": "commitment",
+      "type": "Task",
+      "name": "✋ 必要書類の提出",
+      "status": "done"
+    },
+    {
+      "id": "application",
+      "type": "Task",
+      "name": "📱 オンライン申込",
+      "status": "done"
+    },
+    {
+      "id": "screening",
+      "type": "Task",
+      "name": "🔍 入居審査",
+      "status": "reported-approved"
+    },
+    {
+      "id": "certificate",
+      "type": "Task",
+      "name": "📄 証明書の準備",
+      "status": "done"
+    },
+    {
+      "id": "explanation",
+      "type": "Task",
+      "name": "💬 重要事項説明と署名",
+      "status": "done"
+    },
+    {
+      "id": "payment",
+      "type": "Task",
+      "name": "💴 振込操作",
+      "status": "done-receipt-unverified"
+    },
+    {
+      "id": "report",
+      "type": "Task",
+      "name": "☎️ 完了報告",
+      "status": "done"
+    },
+    {
+      "id": "switch",
+      "type": "Task",
+      "name": "⏳ 契約切替の確認",
+      "status": "unverified"
+    },
+    {
+      "id": "identity",
+      "type": "Document",
+      "name": "🪪 本人確認書類"
+    },
+    {
+      "id": "residence",
+      "type": "Document",
+      "name": "📄 自治体発行の住民票の写し"
+    },
+    {
+      "id": "seal",
+      "type": "Document",
+      "name": "🔴 印鑑"
+    },
+    {
+      "id": "e-notice",
+      "type": "Evidence",
+      "name": "会社側から通知実施の連絡（原本非収録）"
+    },
+    {
+      "id": "e-screening",
+      "type": "Evidence",
+      "name": "審査通過の連絡（原本非収録）"
+    },
+    {
+      "id": "deadline",
+      "type": "Deadline",
+      "name": "切替予定日（相対・日付非収録）"
+    }
+  ],
+  "edges": [
+    {
+      "source": "notice",
+      "relation": "precedes",
+      "target": "commitment"
+    },
+    {
+      "source": "commitment",
+      "relation": "precedes",
+      "target": "application"
+    },
+    {
+      "source": "application",
+      "relation": "precedes",
+      "target": "screening"
+    },
+    {
+      "source": "screening",
+      "relation": "precedes",
+      "target": "certificate"
+    },
+    {
+      "source": "certificate",
+      "relation": "precedes",
+      "target": "explanation"
+    },
+    {
+      "source": "explanation",
+      "relation": "precedes",
+      "target": "payment"
+    },
+    {
+      "source": "payment",
+      "relation": "precedes",
+      "target": "report"
+    },
+    {
+      "source": "report",
+      "relation": "precedes",
+      "target": "switch"
+    },
+    {
+      "source": "actor-a",
+      "relation": "performs",
+      "target": "application"
+    },
+    {
+      "source": "actor-a",
+      "relation": "performs",
+      "target": "explanation"
+    },
+    {
+      "source": "org-c",
+      "relation": "responsible_for",
+      "target": "notice"
+    },
+    {
+      "source": "org-b",
+      "relation": "responsible_for",
+      "target": "screening"
+    },
+    {
+      "source": "application",
+      "relation": "requires",
+      "target": "identity"
+    },
+    {
+      "source": "explanation",
+      "relation": "requires",
+      "target": "residence"
+    },
+    {
+      "source": "explanation",
+      "relation": "requires",
+      "target": "seal"
+    },
+    {
+      "source": "notice",
+      "relation": "supported_by",
+      "target": "e-notice"
+    },
+    {
+      "source": "screening",
+      "relation": "supported_by",
+      "target": "e-screening"
+    },
+    {
+      "source": "switch",
+      "relation": "subject_to",
+      "target": "deadline"
+    }
+  ],
+  "expected_links": [
+    {
+      "source": "notice",
+      "relation": "supported_by",
+      "target": "e-notice"
+    },
+    {
+      "source": "screening",
+      "relation": "supported_by",
+      "target": "e-screening"
+    }
+  ]
+}
