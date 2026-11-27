@@ -40,10 +40,15 @@ def main(argv=None):
             return 1
     if args[:1] == ["otl"]:
         return _otl(args[1:])
+    if args[:1] == ["audit-links"]:
+        from mottainai import main as audit
+
+        return audit(args[1:], prog="onto audit-links")
     parser = argparse.ArgumentParser(prog="onto", description="Run ONTO graph tools and its pinned OTL route.")
     routes = parser.add_subparsers(dest="route", required=True)
     routes.add_parser("exchange", help="import, export, or query RDF")
     routes.add_parser("otl", help="run the standalone OnTautoLogy CLI")
+    routes.add_parser("audit-links", help="find missing, unavailable, or unlinked evidence")
     versions = routes.add_parser("versions", help="report the standalone child source pin")
     versions.add_argument("--json", action="store_true",help="print JSON instead of text")
     if not args:
