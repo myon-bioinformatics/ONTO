@@ -81,7 +81,14 @@ echo '{"premises":[["OR",["NOT","猫"],"哺乳類"],"哺乳類"],"conclusion":"�
 整合する前提から結論が従う場合は `entailed`、前提自体が矛盾する場合は
 `inconsistent-premises` です。結果をTurtleで保存するには `--ttl -o result.ttl` を付けます。
 
+## 検証
+
+[グラフ投影の形式検証](docs/formal-verification.md)では、N3 形式の RDF 項を
+JSON のノード・有向関係へ移す際の情報保持を Lean で証明し、実際の変換を Python
+で検証します。RDF の字句正規化やパーサー全体は別の検証範囲として明示しています。
+
 ## GitHub Pages
+
 
 [ONTO の利用ガイド](https://myon-bioinformatics.github.io/ONTO/)（🎞 GIF デモ / 🧩 機能一覧）は、データだけの `docs/guide.page.json` を親の `reusable-pages-static.yml` が固定版の PySaiyanWeBoo で描きます。
 
