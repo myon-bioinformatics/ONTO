@@ -1,0 +1,125 @@
+{
+  "schema": "editing-rules/1",
+  "synthetic": true,
+  "evaluation_status": "unverified",
+  "dimensions": [
+    "goal",
+    "audience",
+    "register",
+    "lexicon",
+    "syntax",
+    "information_structure",
+    "rhythm",
+    "humor",
+    "publication_structure",
+    "risk",
+    "evaluation"
+  ],
+  "rules": [
+    {
+      "id": "R1",
+      "feature": "multiple_topics",
+      "condition": "general_audience",
+      "operation": "split_topics",
+      "criterion": "focus",
+      "status": "hypothesis"
+    },
+    {
+      "id": "R2",
+      "feature": "technical_terms",
+      "condition": "general_audience",
+      "operation": "simplify_terms",
+      "criterion": "clarity",
+      "status": "hypothesis"
+    },
+    {
+      "id": "R3",
+      "feature": "original_wordplay",
+      "condition": "humor",
+      "operation": "preserve_wordplay",
+      "criterion": "originality",
+      "status": "hypothesis"
+    },
+    {
+      "id": "R4",
+      "feature": "long_setup",
+      "condition": "humor",
+      "operation": "shorten_setup",
+      "criterion": "rhythm",
+      "status": "hypothesis"
+    },
+    {
+      "id": "R5",
+      "feature": "unsupported_intent",
+      "condition": "public",
+      "operation": "separate_fact_inference",
+      "criterion": "accuracy",
+      "status": "hypothesis"
+    },
+    {
+      "id": "R6",
+      "feature": "identifying_detail",
+      "condition": "public",
+      "operation": "replace_with_independent_fiction",
+      "criterion": "privacy",
+      "status": "hypothesis"
+    },
+    {
+      "id": "R7",
+      "feature": "redundancy",
+      "condition": "brevity",
+      "operation": "remove_redundancy",
+      "criterion": "brevity",
+      "status": "hypothesis"
+    },
+    {
+      "id": "R8",
+      "feature": "weak_contrast",
+      "condition": "humor",
+      "operation": "introduce_contrast",
+      "criterion": "humor",
+      "status": "hypothesis"
+    },
+    {
+      "id": "R9",
+      "feature": "flat_ending",
+      "condition": "humor",
+      "operation": "add_punchline",
+      "criterion": "humor",
+      "status": "hypothesis"
+    },
+    {
+      "id": "R10",
+      "feature": "dense_sentence",
+      "condition": "clarity",
+      "operation": "split_sentence",
+      "criterion": "clarity",
+      "status": "hypothesis"
+    },
+    {
+      "id": "R11",
+      "feature": "technical_terms",
+      "condition": "expert_audience",
+      "operation": "preserve_terms",
+      "criterion": "precision",
+      "status": "hypothesis"
+    }
+  ],
+  "examples": [
+    {
+      "input": "冷蔵庫を何度も開けているけど、食べ物が増えるわけではない。",
+      "operation": "remove_redundancy",
+      "output": "冷蔵庫を何度開けても食べ物は増えない。"
+    },
+    {
+      "input": "冷蔵庫を何度開けても食べ物は増えない。",
+      "operation": "introduce_metaphor",
+      "output": "冷蔵庫をリロードしても在庫は増えない。"
+    },
+    {
+      "input": "冷蔵庫をリロードしても在庫は増えない。",
+      "operation": "add_punchline",
+      "output": "冷蔵庫をリロードしても在庫は増えない。不具合だろ。"
+    }
+  ]
+}
