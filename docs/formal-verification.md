@@ -102,8 +102,18 @@ RDF/N3 パーサー自体、DB の保存・分離・並行動作、RDF の意味
 JSON から RDF へ戻す汎用インポーターは今回の証明対象に含まない。
 現行 ONTO の JSON 出力に対応する汎用 JSON→TTL API はまだない。
 
-また、字句上同じ RDF term を保持する保証と、値の同一性は区別が必要になる。
-たとえば現行の `transfer()` の `from_n3()` 復元では、明示的に正規化を止めて作った
-`"01"^^xsd:integer` が `"1"^^xsd:integer` になる。このため DB 行→RDF 往復について、
-すべての非正規 literal まで字句を保持するとは主張しない。N3 token→JSON の投影は
-与えられた文字列をそのまま保持し、この境界の外で発生する正規化をモデルに隠さない。
+字句上同じ RDF term を保持する保証と、値の同一性は区別が必要になる。
+DB 行→RDF の復元では `ontology.py::_statement_from_row()` が既存の Turtle パーサーを
+局所 sink から呼び、`Literal(..., normalize=False)` で復元する。整数の `"01"`・`"+1"`・
+`"1"` は値が同じでも別 term として保持し、誤って重複関係とは判定しない。
+グローバルな `rdflib.NORMALIZE_LITERALS` の設定は変更しない。
+
+この復元は [`tests/test_exchange_lexical.py`](../tests/test_exchange_lexical.py) で、
+非正規の数値・boolean・dateTime、言語と datatype、Unicode・引用符・改行、
+型に合わない字句の保持、破損した N3 と 1 行に複数 statement を含む入力の拒否を調べる。
+型に合わない字句を保持しても、その値が妥当だと認定するものではない。
+このパーサー接続も Lean の N3 token→JSON 証明の外側にある。
+
+`read_graph()` や Turtle stdin の読み込みは通常の rdflib パーサーの正規化方針を使うため、
+任意の元ファイルについて字句や表記まで完全に戻せるとは主張しない。
+N3 token→JSON の投影は、これらの処理が終わって与えられた文字列を保持する。
