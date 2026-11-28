@@ -7,7 +7,9 @@ ROOT = Path(__file__).resolve().parents[1]
 _spec = importlib.util.spec_from_file_location("onto_fleet_check", ROOT / "vendor/fleet_check.py")
 fleet = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(fleet)
-ACCEPTED = {"vendor/fleet_check.py": "eee8c096fc753465a5d5a26264e64c12e555638f"}
+ACCEPTED = {"vendor/fleet_check.py": "eee8c096fc753465a5d5a26264e64c12e555638f",
+            "vendor/cli_args.py": "55d8d0bfe699869c2439ff9ca86abfd3aa879846",
+            "vendor/cli_args-LICENSE": "55d8d0bfe699869c2439ff9ca86abfd3aa879846"}
 
 
 class VendorLock(unittest.TestCase):

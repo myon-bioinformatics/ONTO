@@ -10,13 +10,14 @@ from unittest.mock import patch
 
 import onto_cli
 
+from _cli import run_cli
+
 
 class Launcher(unittest.TestCase):
     def test_help_and_versions_do_not_load_rdf_or_uv(self):
         for args, name in [([], "onto"), (["--help"], "onto"), (["exchange", "--help"], "onto exchange")]:
-            result = subprocess.run(
-                [sys.executable, "-S", str(Path(__file__).resolve().parents[1] / "onto_cli.py"), *args], capture_output=True, text=True, check=True
-            )
+            result = run_cli(Path(__file__).resolve().parents[1] / "onto_cli.py", *args, python_options=("-S",))
+            self.assertEqual(result.returncode, 0, result.stderr)
             self.assertIn(f"usage: {name}", result.stdout)
         with patch.object(onto_cli.shutil, "which", side_effect=AssertionError), contextlib.redirect_stdout(io.StringIO()) as out:
             self.assertEqual(onto_cli.main(["versions", "--json"]), 0)
