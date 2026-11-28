@@ -1,11 +1,11 @@
 import json
-import subprocess
-import sys
 import tempfile
 import unittest
 from pathlib import Path
 
 from mottainai import link_gaps
+
+from _cli import run_cli
 
 
 def edge(source, target, relation="supported_by"):
@@ -34,15 +34,13 @@ class LinkGapTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "expected.json"
             path.write_text(json.dumps([edge("assessment", "retained")]))
-            args = [sys.executable, "-S", str(root / "onto_cli.py"), "audit-links", "-"]
             data = json.dumps(fixture())
-            result = subprocess.run(args, input=data, capture_output=True, text=True)
+            result = run_cli(root / "onto_cli.py", "audit-links", "-", python_options=("-S",), stdin=data)
             self.assertEqual(result.returncode, 1, result.stderr)
             self.assertEqual(len(json.loads(result.stdout)), 3)
-            clean = subprocess.run(args + ["--expected", str(path)], input=data, capture_output=True, text=True)
+            clean = run_cli(root / "onto_cli.py", "audit-links", "-", "--expected", str(path), python_options=("-S",), stdin=data)
             self.assertEqual(clean.returncode, 0, clean.stderr)
             self.assertEqual(json.loads(clean.stdout), [])
-        direct = subprocess.run([sys.executable, "-S", str(ROOT / "mottainai.py"), str(SAMPLE)],
-                                capture_output=True, text=True)
+        direct = run_cli(ROOT / "mottainai.py", str(SAMPLE), python_options=("-S",))
         self.assertEqual(direct.returncode, 1, direct.stderr)
         self.assertEqual(json.loads(direct.stdout), json.loads(result.stdout))
