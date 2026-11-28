@@ -1,0 +1,92 @@
+{
+  "schema": "onto-guide-case/1",
+  "synthetic": true,
+  "source": "independent-fiction",
+  "evaluation_status": "unverified",
+  "vocabulary": {
+    "appliesTo": [
+      [
+        "Strategy"
+      ],
+      "Context"
+    ],
+    "targets": [
+      [
+        "Strategy"
+      ],
+      "Goal"
+    ],
+    "constrainedBy": [
+      [
+        "Strategy"
+      ],
+      "Constraint"
+    ],
+    "assessedBy": [
+      [
+        "Strategy"
+      ],
+      "Evaluation"
+    ]
+  },
+  "nodes": [
+    {
+      "id": "goal:clarity",
+      "type": "Goal",
+      "label": "短文を読みやすくする"
+    },
+    {
+      "id": "context:fictional-post",
+      "type": "Context",
+      "label": "架空の短文投稿環境"
+    },
+    {
+      "id": "strategy:contrast",
+      "type": "Strategy",
+      "label": "対比・簡潔さ・オチ"
+    },
+    {
+      "id": "constraint:privacy",
+      "type": "Constraint",
+      "label": "推測による個人・居住地特定を防ぐ"
+    },
+    {
+      "id": "constraint:claims",
+      "type": "Constraint",
+      "label": "根拠のない断定を避ける"
+    },
+    {
+      "id": "evaluation:pending",
+      "type": "Evaluation",
+      "label": "未実測",
+      "status": "unverified"
+    }
+  ],
+  "edges": [
+    {
+      "source": "strategy:contrast",
+      "relation": "appliesTo",
+      "target": "context:fictional-post"
+    },
+    {
+      "source": "strategy:contrast",
+      "relation": "targets",
+      "target": "goal:clarity"
+    },
+    {
+      "source": "strategy:contrast",
+      "relation": "constrainedBy",
+      "target": "constraint:privacy"
+    },
+    {
+      "source": "strategy:contrast",
+      "relation": "constrainedBy",
+      "target": "constraint:claims"
+    },
+    {
+      "source": "strategy:contrast",
+      "relation": "assessedBy",
+      "target": "evaluation:pending"
+    }
+  ]
+}

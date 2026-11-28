@@ -1,0 +1,126 @@
+{
+  "schema": "guide-relation-candidates/1",
+  "synthetic": true,
+  "relations": [
+    {
+      "id": "appliesTo",
+      "category": "application",
+      "domain": "Strategy",
+      "range": "Context",
+      "status": "candidate"
+    },
+    {
+      "id": "requires",
+      "category": "condition",
+      "domain": "Strategy",
+      "range": "Condition",
+      "status": "candidate"
+    },
+    {
+      "id": "prevents",
+      "category": "condition",
+      "domain": "Condition",
+      "range": "Strategy",
+      "status": "candidate"
+    },
+    {
+      "id": "conflictsWith",
+      "category": "strategy",
+      "domain": "Strategy",
+      "range": "Strategy",
+      "status": "candidate"
+    },
+    {
+      "id": "complements",
+      "category": "strategy",
+      "domain": "Strategy",
+      "range": "Strategy",
+      "status": "candidate"
+    },
+    {
+      "id": "alternativeTo",
+      "category": "strategy",
+      "domain": "Strategy",
+      "range": "Strategy",
+      "status": "candidate"
+    },
+    {
+      "id": "precedes",
+      "category": "order",
+      "domain": "Strategy",
+      "range": "Strategy",
+      "status": "candidate"
+    },
+    {
+      "id": "supportedBy",
+      "category": "evidence",
+      "domain": "Claim",
+      "range": "Evidence",
+      "status": "candidate"
+    },
+    {
+      "id": "refutedBy",
+      "category": "evidence",
+      "domain": "Claim",
+      "range": "Evidence",
+      "status": "candidate"
+    },
+    {
+      "id": "improves",
+      "category": "effect",
+      "domain": "Strategy",
+      "range": "Metric",
+      "status": "candidate"
+    },
+    {
+      "id": "degrades",
+      "category": "effect",
+      "domain": "Strategy",
+      "range": "Metric",
+      "status": "candidate"
+    },
+    {
+      "id": "evaluatedBy",
+      "category": "evaluation",
+      "domain": "Strategy",
+      "range": "Evaluation",
+      "status": "candidate"
+    },
+    {
+      "id": "supersedes",
+      "category": "revision",
+      "domain": "Claim",
+      "range": "Claim",
+      "status": "candidate"
+    }
+  ],
+  "aliases": {
+    "assessedBy": "evaluatedBy"
+  },
+  "edges": [
+    {
+      "source": "shorten_text",
+      "relation": "improves",
+      "target": "brevity",
+      "conditions": [
+        "redundancy_present"
+      ],
+      "confidence": null,
+      "evidence": [],
+      "counterexamples": [],
+      "status": "hypothesis"
+    },
+    {
+      "source": "shorten_text",
+      "relation": "degrades",
+      "target": "completeness",
+      "conditions": [
+        "essential_detail_removed"
+      ],
+      "confidence": null,
+      "evidence": [],
+      "counterexamples": [],
+      "status": "hypothesis"
+    }
+  ]
+}
