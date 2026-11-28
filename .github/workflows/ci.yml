@@ -1,5 +1,8 @@
 name: Shared Python API
 on:
+  schedule:
+    - cron: "43 20 * * *"  # 🔁 follow-main
+  workflow_dispatch:
   push:
     branches: [main]
   pull_request:
@@ -65,3 +68,14 @@ jobs:
           conclusion, = graph.objects(check, ot.conclusion)
           assert json.loads(str(graph.value(conclusion, ot.rule))) == "mammal"
           PY
+
+  # 🔁 own sources follow main: on schedule / manual run, take main of own repositories and push to main
+  follow-main:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    uses: myon-bioinformatics/myon-bioinformatics/.github/workflows/reusable-follow-main.yml@main
+    permissions:
+      contents: write
+    with:
+      node-version: "26"
+      check: |
+        uv run --no-project python -S -m unittest discover -s tests -q
