@@ -8,11 +8,29 @@ on:
     branches: [main]
     paths:
       - "docs/guide.page.json"
+      - "docs/guide.features.json"
+      - "onto_cli.py"
+      - "ontology.py"
+      - "knowledgegraph.py"
+      - "mottainai.py"
+      - "tests/test_link_gaps.py"
+      - "examples/mottainai/evidence-links.json"
+      - "onto_shared/**"
+      - "pyproject.toml"
       - "docs/assets/**"
       - ".github/workflows/pages.yml"
   pull_request:
     paths:
       - "docs/guide.page.json"
+      - "docs/guide.features.json"
+      - "onto_cli.py"
+      - "ontology.py"
+      - "knowledgegraph.py"
+      - "mottainai.py"
+      - "tests/test_link_gaps.py"
+      - "examples/mottainai/evidence-links.json"
+      - "onto_shared/**"
+      - "pyproject.toml"
       - "docs/assets/**"
       - ".github/workflows/pages.yml"
 
@@ -27,6 +45,7 @@ jobs:
     with:
       artifact_path: _site
       guide_page: docs/guide.page.json
+      guide_features_config: docs/guide.features.json
       guide_assets: >-
         docs/assets/repository-concept.jpg=overview.jpg
         docs/assets/graphs.gif=demos/graphs.gif

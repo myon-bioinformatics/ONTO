@@ -1,0 +1,25 @@
+[
+  {
+    "source": "onto_cli.py",
+    "cli": [
+      [
+        "--help"
+      ],
+      [
+        "exchange"
+      ],
+      [
+        "audit-links"
+      ]
+    ]
+  },
+  {
+    "source": "ontology.py"
+  },
+  {
+    "source": "knowledgegraph.py"
+  },
+  {
+    "source": "mottainai.py"
+  }
+]
