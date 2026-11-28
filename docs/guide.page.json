@@ -19,7 +19,7 @@
       "id": "guide",
       "tabs": [
         {
-          "label": "🧩 機能一覧",
+          "label": "🧭 使い方",
           "blocks": [
             {
               "type": "image",
@@ -84,7 +84,7 @@
                 {
                   "type": "card",
                   "title": "🔁 RDF の出し入れ",
-                  "text": "RDF を読み込み・書き出し・問い合わせます。",
+                  "text": "RDF を読み込み・書き出し・問い合わせます。実際の交換操作には checkout から uv pip install '.[exchange]' で追加依存を入れます。",
                   "blocks": [
                     {
                       "type": "output",
@@ -94,8 +94,19 @@
                 },
                 {
                   "type": "card",
+                  "title": "🔍 証跡リンクを監査",
+                  "text": "根拠の節点はあるのに結ばれていない場合、原本が取得不能な場合、節点が未登録の場合を区別します。次の例はリポジトリのルートで標準ライブラリだけで動きます。指摘ありは終了コード 1、指摘なしは 0 です。",
+                  "blocks": [
+                    {
+                      "type": "output",
+                      "text": "python3 -S onto_cli.py audit-links examples/mottainai/evidence-links.json"
+                    }
+                  ]
+                },
+                {
+                  "type": "card",
                   "title": "🧮 OnTautoLogy を呼ぶ",
-                  "text": "固定した版の OTL の CLI をそのまま呼びます。",
+                  "text": "uv が必要です。固定した版の OTL の CLI を呼びます。初回は取得が必要です。現在の固定先は versions で確認できます。",
                   "blocks": [
                     {
                       "type": "output",
@@ -104,6 +115,15 @@
                   ]
                 }
               ]
+            }
+          ]
+        },
+        {
+          "label": "📚 機能全一覧",
+          "blocks": [
+            {
+              "type": "text",
+              "text": "この一覧は ONTO の実装から生成します。otl の先にあるコマンドは ONTO の機能として重複掲載せず、OnTautoLogy 側のガイドを参照してください。"
             }
           ]
         },
@@ -124,6 +144,12 @@
                         "id": "versions",
                         "title": "📌 固定した OTL",
                         "command": "python3 -S onto_cli.py versions",
+                        "run": true
+                      },
+                      {
+                        "id": "audit-links",
+                        "title": "🔍 証跡の欠落と正常経路を照合",
+                        "command": "python3 -S -m unittest discover -s tests -p 'test_link_gaps.py'",
                         "run": true
                       },
                       {
