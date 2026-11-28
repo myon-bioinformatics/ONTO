@@ -1,13 +1,11 @@
 import json
-import subprocess
-import sys
 import tempfile
 import unittest
 from pathlib import Path
 
 from mottainai import link_gaps
 
-from vendor.cli_args import run_cli
+from _cli import run_cli
 
 
 def edge(source, target, relation="supported_by"):

@@ -10,7 +10,7 @@ from unittest.mock import patch
 
 import onto_cli
 
-from vendor.cli_args import run_cli
+from _cli import run_cli
 
 
 class Launcher(unittest.TestCase):
